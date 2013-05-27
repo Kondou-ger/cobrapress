@@ -1,0 +1,8 @@
+<aside>
+	<h1>Recent posts</h1>
+	<ul>
+	{% for post in latest_posts %}
+		<li><a href="{% post.link %}">{% post.title %}</a>
+	{% endfor %}
+	</ul>
+</aside>

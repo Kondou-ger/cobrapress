@@ -42,8 +42,7 @@ def generate():
 
 	print(config)
 	from cobra import generate
-	generate.generate(config).translate_markdown("test")
-
+	generate.generate(config).generate_html()
 	print("Done!")
 	return
 
