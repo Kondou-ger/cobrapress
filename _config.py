@@ -1,5 +1,5 @@
 # CobraPress config
-# Version 0.0.1
+# Version 0.0.2
 
 # massive dictionaries, biatch!
 config = {
@@ -17,7 +17,9 @@ config = {
 
 		"posts_per_page": 10,				# how many posts to show before using pages
 
-		"readmore": "Read more &rarr;",			# what to show after shortened articles
+		"readmore":	"Read more &rarr;",		# what to show after shortened articles
 
-		"asides": ["recent_posts", "github"],
+		"asides":	["recent_posts", "github"],
+
+		"markdown_extensions":	["codehilite", "smartypants"],
 }

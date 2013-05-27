@@ -2,4 +2,7 @@
 *.pyc
 __pycache__
 
+themes/*
+!themes/arboc
+
 config.py

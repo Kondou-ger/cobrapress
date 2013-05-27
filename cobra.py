@@ -4,13 +4,16 @@
 import argparse
 from sys import argv, exit
 from shutil import copyfile
+from datetime import date
+
+import cobra
 
 def main(argv):
 	"""
 	Parse our arguments
 	"""
 
-	parser = argparse.ArgumentParser(description="CobraPress Version 0.0.1")
+	parser = argparse.ArgumentParser(description="CobraPress Version 0.0.2")
 	parser.add_argument("--generate", help="Generate the static html", action="store_true")
 	parser.add_argument("--init", help="Initialize this installation", action="store_true")
 	parser.add_argument("--new_post", help="Generate a new post", action="store_true")
@@ -38,6 +41,8 @@ def generate():
 	config = readconfig()
 
 	print(config)
+	from cobra import generate
+	generate.generate(config).translate_markdown("test")
 
 	print("Done!")
 	return
@@ -68,6 +73,11 @@ def new_post(title):
 	if title == True:
 		print("What's the title?")
 		title = input("Title: ")
+
+	filename = str(date.today().year)+"-"+str(date.today().month)+"-"+str(date.today().day)+"-"+title
+	post = open("posts/"+filename, 'a')
+	post.write(title)
+	post.close
 
 	print(title)
 	print("Done!")
@@ -101,7 +111,7 @@ def readconfig():
 
 	# Check, whether there's a custom entry
 	for argument in _config.config:
-		if config.config[argument]:
+		if config.config[argument] or config.config[argument] == []:
 			configuration[argument] = config.config[argument]
 		else:
 			configuration[argument] = _config.config[argument]
