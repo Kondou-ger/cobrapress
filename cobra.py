@@ -75,7 +75,7 @@ def new_post(title):
 
 	filename = str(date.today().year)+"-"+str(date.today().month)+"-"+str(date.today().day)+"-"+title
 	post = open("posts/"+filename, 'a')
-	post.write(title)
+	post.write("++++\nTitle: \"" + title + "\"\nPublish: True\n++++")
 	post.close
 
 	print(title)

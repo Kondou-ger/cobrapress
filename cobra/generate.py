@@ -12,6 +12,7 @@ class generate(object):
 		generate static html
 		"""
 		posts = self.generate_post_html()
+		print(posts)
 		templates = self.generate_template_html()
 
 		for template in templates:
@@ -34,7 +35,8 @@ class generate(object):
 
 	def generate_post_html(self):
 		"""
-		generate html from all posts and return a list with all posts
+		generate html from all posts and return a list with all posts and their metadata
+		[x][0] is the metadata, [x][1] is the post
 		"""
 
 		files = listdir("posts")
@@ -43,12 +45,11 @@ class generate(object):
 		print(files)
 		for post in files:
 			markdownfile = open("posts/"+post, 'r')
-			markdown = markdownfile.read()
+			markdowntext = markdownfile.read()
 			markdownfile.close()
-			print(markdown)
-			html = self.translate_markdown(markdown)
-			print(html)
-			posts.append(html)
+			print(markdowntext)
+			translated = self.translate_markdown(markdowntext)
+			posts.append(translated)
 
 		return posts
 
@@ -62,15 +63,25 @@ class generate(object):
 		env = Environment(loader=FileSystemLoader(templatepath))
 		rendered = env.get_template(templatename).render(params)
 
-		return rendered
+		return [templatename, rendered]
 
-	def translate_markdown(self, markdown):
+	def translate_markdown(self, markdowntext):
 		"""
 		generate a post from given markdown
+		returns a list, [0] are the infos, [1] is the html
 		"""
 
 		from .thirdparty import markdown
+		import re
 
-		html = markdown.markdown(str(markdown), extensions=self.config["markdown_extensions"])
-		return html
+		regex = re.compile(r"\+\+\+(.+?)\+\+\+(.+)", re.DOTALL)
+		matches = regex.match(markdowntext)
+
+		#try:
+		html = markdown.markdown(matches.groups(2), extensions=self.config["markdown_extensions"])
+		#except AttributeError:
+		#	print(markdowntext + "does not look like markdown!")
+		#	exit(6)
+
+		return [matches.groups(1), html]
 
