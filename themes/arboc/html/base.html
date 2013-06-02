@@ -2,14 +2,29 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>{% title %}</title>
-		<meta name="author" content="{% author %}">
+		<title>{{ title }}</title>
+		<meta name="author" content="{{ author }}">
 		<link rel="icon" href="/favicon.png">
 		<link rel="stylesheet" href="/css/style.css">
 	</head>
 	<body>
 		<header>
-			<h1>{% title %}</h1>
+			<h1>{{ title }}</h1>
+			<h2>{{ subtitle }}</h2>
 		</header>
+		<nav>
+			<ul>
+			{% for location in navigation %}
+				<li><a href="{{ location.link }}">{{ location.name }}</a></li>
+			{% endfor %}
+			</ul>
+		</nav>
+		<div id="page">
+			<div id="content">{% block content %}{% endblock %}</div>
+			<div id="sidebar">{% block sidebar %}{% endblock %}</div>
+		</div>
+		<footer>
+			Copyright &copy; {{ year }} - {{ author }} – Powered by <a href="https://github.com/Kondou-ger/cobrapress">Cobrapress</a>
+		</footer>
 	</body>
 </html>

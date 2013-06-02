@@ -29,7 +29,7 @@ def main(argv):
 	elif args.list:
 		listargs()
 	else:
-		print("Unknown argument!\nUse --list or --help to get available arguments.")
+		parser.print_help()
 	
 	return
 
