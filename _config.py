@@ -1,7 +1,6 @@
 # CobraPress config
-# Version 0.0.2
+# Version 0.0.3
 
-# massive dictionaries, biatch!
 config = {
 		"url":		"http://example.com/blog",	# make this the location where your blog's index will be
 		"title":	"Blog-tastic!",			# the blog's title
@@ -15,11 +14,13 @@ config = {
 
 		"link-struct":	"/%year/%month/%day/%title",	# what the link structure should be like
 
+		"htmldir": "public/",				# where to put the resulting html (trailing slash is important!)
+
 		"posts_per_page": 10,				# how many posts to show before using pages
 
 		"readmore":	"Read more &rarr;",		# what to show after shortened articles
 
-		"asides":	["recent_posts", "github"],
+		"asides":	["recent_posts", "github"],	# what asides to show
 
-		"markdown_extensions":	["codehilite", "smartypants"],
+		"markdown_extensions":	["codehilite", "smartypants"], # what markdown extensions to use
 }

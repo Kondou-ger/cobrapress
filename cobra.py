@@ -13,7 +13,7 @@ def main(argv):
 	Parse our arguments
 	"""
 
-	parser = argparse.ArgumentParser(description="CobraPress Version 0.0.2")
+	parser = argparse.ArgumentParser(description="CobraPress Version 0.0.3")
 	parser.add_argument("--generate", help="Generate the static html", action="store_true")
 	parser.add_argument("--init", help="Initialize this installation", action="store_true")
 	parser.add_argument("--new_post", help="Generate a new post", action="store_true")
@@ -98,9 +98,9 @@ def readconfig():
 
 	# Check, whether there's a custom entry
 	for argument in _config.config:
-		if config.config[argument] or config.config[argument] == []:
+		try:
 			configuration[argument] = config.config[argument]
-		else:
+		except:
 			configuration[argument] = _config.config[argument]
 
 	return configuration

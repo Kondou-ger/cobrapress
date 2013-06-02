@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from os import listdir
+from shutil import copyfile
 
 class generate(object):
 	def __init__(self, config):
@@ -17,14 +18,19 @@ class generate(object):
 			if True: # If theres a post to insert
 				pass# Somehow merge posts and templates here
 
-			# copy template to the proper location now
+			# write template to the proper location now
+			templateoutput = open(self.config['htmldir'] + template[0], 'w')
+			templateoutput.write(template[1])
+			templateoutput.close()
+
 			
 
 	def generate_template_html(self):
 		"""
 		generate html from templates
+		returns a list with lists in it - [x][0] is the filename, [x][1] is the html
 		"""
-		return ["<html></html>"] # dummy
+		return [["index.html", "<html></html>"]] # dummy
 
 	def generate_post_html(self):
 		"""
