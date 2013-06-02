@@ -71,17 +71,17 @@ class generate(object):
 		returns a list, [0] are the infos, [1] is the html
 		"""
 
-		from .thirdparty import markdown
+		import markdown
 		import re
 
-		regex = re.compile(r"\+\+\+(.+?)\+\+\+(.+)", re.DOTALL)
+		regex = re.compile(r"^\+\+\+(.+?)\+\+\+(.+)", re.DOTALL)
 		matches = regex.match(markdowntext)
 
-		#try:
-		html = markdown.markdown(matches.groups(2), extensions=self.config["markdown_extensions"])
-		#except AttributeError:
-		#	print(markdowntext + "does not look like markdown!")
-		#	exit(6)
+		try:
+			html = markdown.markdown(matches.group(2), extensions=self.config["markdown_extensions"])
+		except AttributeError:
+			print(markdowntext + "does not look like markdown!")
+			exit(6)
 
-		return [matches.groups(1), html]
+		return [matches.group(1)[1:-1], html]
 
