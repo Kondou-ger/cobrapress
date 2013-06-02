@@ -27,7 +27,7 @@ def main(argv):
 	elif args.new_post:
 		new_post(args.new_post)
 	elif args.list:
-		listargs()
+		parser.print_usage()
 	else:
 		parser.print_help()
 	
@@ -80,18 +80,6 @@ def new_post(title):
 
 	print(title)
 	print("Done!")
-	return
-
-def listargs():
-	"""
-	List available arguments
-	"""
-
-	print("generate")
-	print("init")
-	print("new_post")
-	print("list")
-	print("help")
 	return
 
 def readconfig():
